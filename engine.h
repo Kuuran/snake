@@ -3,6 +3,10 @@
 
 #include "main.h"
 
+typedef node;
+typedef queue;
+
+
 char mat[MAX_X+1][MAX_Y+1];
 
 

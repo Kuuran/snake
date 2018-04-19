@@ -3,6 +3,9 @@
 
 #include "main.h"
 
+typedef node;
+typedef queue;
+
 SDL_Renderer* renderer = NULL;
 
 SDL_Surface*  field_surface = NULL;
