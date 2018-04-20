@@ -1,4 +1,4 @@
-#include "engine.h"
+#include "main.h"
 
 void input(void)
 
@@ -47,6 +47,7 @@ void input(void)
 int update(void)
 
 {
+    delay=16;
 
     body = head;
 

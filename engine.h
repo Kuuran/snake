@@ -1,18 +1,7 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-#include "main.h"
-
-typedef node;
-typedef queue;
-
-
-char mat[MAX_X+1][MAX_Y+1];
-
-
-int delay = 16;
-
-
+int delay;
 
 void input(void);
 

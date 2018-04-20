@@ -9,10 +9,9 @@
 
 #include <SDL2/SDL.h>
 
-#include "graphics.h"
-
 #include "engine.h"
 
+#include "graphics.h"
 
 
 #define QUEUE_SIZE 400
@@ -34,9 +33,9 @@
 
 typedef struct tag_node {
 
-    char x;
+    int x;
 
-    char y;
+    int y;
 
 } node;
 
@@ -60,6 +59,8 @@ char old_dir;
 
 char eaten;
 
+char mat[MAX_X+1][MAX_Y+1];
+
 
 
 node body;
@@ -72,6 +73,5 @@ node fruit;
 
 
 queue snake;
-
 
 #endif //MAIN_H
