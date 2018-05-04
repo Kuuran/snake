@@ -1,7 +1,10 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-int delay;
+int *delay;
+
+
+SDL_Window *window;
 
 void input(void);
 

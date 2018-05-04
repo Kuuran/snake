@@ -5,22 +5,24 @@ void input(void)
 {
 
     const Uint8 *state = SDL_GetKeyboardState(NULL);
+    SDL_DisplayMode dm;
+
 
     SDL_PumpEvents();
 
-    if (state[SDL_SCANCODE_UP]) {
+    if (state[SDL_SCANCODE_UP] || state[SDL_SCANCODE_W]) {
 
         dir = UP;
 
-    } else if (state[SDL_SCANCODE_DOWN]) {
+    } else if (state[SDL_SCANCODE_DOWN] || state[SDL_SCANCODE_S]) {
 
         dir = DOWN;
 
-    } else if (state[SDL_SCANCODE_LEFT]) {
+    } else if (state[SDL_SCANCODE_LEFT] || state[SDL_SCANCODE_A]) {
 
         dir = LEFT;
 
-    } else if (state[SDL_SCANCODE_RIGHT]) {
+    } else if (state[SDL_SCANCODE_RIGHT]|| state[SDL_SCANCODE_D]) {
 
         dir = RIGHT;
 
@@ -28,6 +30,25 @@ void input(void)
 
         exit(0);
 
+    }
+     SDL_Event event;
+
+
+
+    if (SDL_PollEvent(&event))
+    {
+        switch (event.type)
+        {
+            case SDL_KEYUP:
+                switch (event.key.keysym.sym)
+                {
+                    case SDLK_f:
+                        SDL_RestoreWindow(window); //Incase it's maximized...
+                        SDL_SetWindowSize(window, dm.w, dm.h + 10);
+                        SDL_SetWindowPosition(window , SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+                }
+                break;
+        }
     }
 
     /* Ignore opposite direction */
@@ -47,7 +68,7 @@ void input(void)
 int update(void)
 
 {
-    delay=16;
+
 
     body = head;
 
@@ -79,9 +100,21 @@ int update(void)
 
     }
 
-    if (head.x < 0 || head.x > MAX_X || head.y < 0 || head.y > MAX_Y) {
+    if (head.x < -1 && dir == LEFT) {
 
-        return 1;
+        head.x=MAX_X;
+
+    }else if( head.x > MAX_X && dir == RIGHT){
+
+    head.x=0;
+
+    }else if( head.y < 0 && dir == UP){
+
+    head.y=MAX_Y;
+
+    }else if( head.y > MAX_Y && dir == DOWN){
+
+    head.y=0;
 
     }
 
@@ -101,7 +134,7 @@ int update(void)
 
             case 10:
 
-                delay -= 4;
+                *delay -= 2;
 
                 printf("Level 2\n");
 
@@ -109,7 +142,7 @@ int update(void)
 
             case 20:
 
-                delay -= 4;
+                *delay -= 2;
 
                 printf("Level 3\n");
 
@@ -117,7 +150,7 @@ int update(void)
 
             case 30:
 
-                delay /= 2;
+                *delay /= 2;
 
                 printf("Level 4\n");
 
@@ -125,7 +158,7 @@ int update(void)
 
             case 40:
 
-                delay /= 2;
+                *delay /= 2;
 
                 printf("Level 5\n");
 

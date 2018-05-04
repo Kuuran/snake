@@ -19,13 +19,15 @@ SDL_Texture*  shead_texture = NULL;
 
 SDL_Texture*  snake_texture = NULL;
 
+
+
 void init(void)
 
 {
 
     int i, j,wind;
 
-    SDL_Window *window = NULL;
+    window = NULL;
 
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         fprintf(stderr, "SDL_Init: %s\n", SDL_GetError());
@@ -41,6 +43,8 @@ void init(void)
     {
         fprintf(stderr, "SDL_Init: %s\n", SDL_GetError());
     }
+
+
 
     wind=SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 

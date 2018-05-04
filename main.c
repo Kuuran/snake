@@ -4,7 +4,8 @@ int main(int argc, char *argv[])
 
 {
 
-    delay=16;
+    delay=(int*)malloc(sizeof(int));
+    *delay=8;
 
     init();
 
@@ -22,7 +23,7 @@ int main(int argc, char *argv[])
 
         render();
 
-        SDL_Delay(delay * 10);
+        SDL_Delay(*delay * 10);
 
     }
 
