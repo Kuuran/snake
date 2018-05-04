@@ -57,28 +57,28 @@ void init(void)
 
     SDL_RenderPresent(renderer);
 
-    fruit_surface = SDL_LoadBMP("apple.bmp.bmp");
+    fruit_surface = SDL_LoadBMP("apple.bmp");
 
     if(fruit_surface==NULL)
     {
         fprintf(stderr, "SDL_Init: %s\n", SDL_GetError());
     }
 
-    shead_surface = SDL_LoadBMP("head.bmp.bmp");
+    shead_surface = SDL_LoadBMP("head.bmp");
 
     if(shead_surface==NULL)
     {
         fprintf(stderr, "SDL_Init: %s\n", SDL_GetError());
     }
 
-    snake_surface = SDL_LoadBMP("snake.bmp.bmp");
+    snake_surface = SDL_LoadBMP("snake.bmp");
 
     if(snake_surface==NULL)
     {
         fprintf(stderr, "SDL_Init: %s\n", SDL_GetError());
     }
 
-    field_surface = SDL_LoadBMP("field.bmp.bmp");
+    field_surface = SDL_LoadBMP("field.bmp");
 
     if(field_surface==NULL)
     {
