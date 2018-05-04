@@ -5,3 +5,9 @@
 .idea/vcs.xml
 .idea/workspace.xml
 cmake-build-debug/CMakeFiles/clion-log.txt
+*.exe
+*.o
+*.cbp
+*.depend
+*.layout
+*.dll
