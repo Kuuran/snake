@@ -9,6 +9,8 @@
 
 #include <SDL2/SDL.h>
 
+#include <math.h>
+
 #include "engine.h"
 
 #include "graphics.h"
@@ -30,12 +32,14 @@
 
 #define TILE_SIZE 32
 
+#define SPEED_SCALE 1
+
 
 typedef struct tag_node {
 
-    int x;
+    double x;
 
-    int y;
+    double y;
 
 } node;
 
@@ -54,6 +58,8 @@ typedef struct tag_queue {
 
 
 char dir;
+
+double angle;
 
 char old_dir;
 

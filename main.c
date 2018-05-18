@@ -6,6 +6,7 @@ int main(int argc, char *argv[])
 
     delay=(int*)malloc(sizeof(int));
     *delay=8;
+    angle = 0;
 
     init();
 

@@ -9,7 +9,7 @@ void input(void)
 
 
     SDL_PumpEvents();
-
+/*
     if (state[SDL_SCANCODE_UP] || state[SDL_SCANCODE_W]) {
 
         dir = UP;
@@ -18,13 +18,13 @@ void input(void)
 
         dir = DOWN;
 
-    } else if (state[SDL_SCANCODE_LEFT] || state[SDL_SCANCODE_A]) {
+    } else*/if (state[SDL_SCANCODE_LEFT] || state[SDL_SCANCODE_A]) {
 
-        dir = LEFT;
+        angle -= M_PI/7.0;
 
     } else if (state[SDL_SCANCODE_RIGHT]|| state[SDL_SCANCODE_D]) {
 
-        dir = RIGHT;
+        angle+= M_PI/7.0;
 
     } else if (state[SDL_SCANCODE_ESCAPE]) {
 
@@ -52,7 +52,7 @@ void input(void)
     }
 
     /* Ignore opposite direction */
-
+    // INUTILE ?
     if (dir + old_dir != 5 || snake.len == 1) {
 
         old_dir = dir;
@@ -71,7 +71,7 @@ int update(void)
 
 
     body = head;
-
+/*
     switch (dir) {
 
         case UP:
@@ -98,33 +98,44 @@ int update(void)
 
             break;
 
-    }
+    }*/
 
-    if (head.x < -1 && dir == LEFT) {
+    head.x += cos(angle) * SPEED_SCALE;
+    head.y += sin(angle) * SPEED_SCALE;
+
+
+    if (head.x < -1 /*&& (angle <= M_PI/2 || angle >= -M_PI/2)*/) {
 
         head.x=MAX_X;
 
-    }else if( head.x > MAX_X && dir == RIGHT){
+    }else if( head.x > MAX_X /*&& (angle >= M_PI/2 || angle <= -M_PI/2)*/){
 
     head.x=0;
 
-    }else if( head.y < 0 && dir == UP){
+    }else if( head.y < 0 /*&& (angle <= M_PI || angle >= 0)*/){
 
     head.y=MAX_Y;
 
-    }else if( head.y > MAX_Y && dir == DOWN){
+    }else if( head.y > MAX_Y /*&& (angle >= M_PI || angle <= 0)*/){
 
     head.y=0;
 
     }
+    // Detection des collisions
+    for (int i = 0; i < snake.len-1; i++){
+        if (head.x <= snake.elems[i].x +0.5 && head.x >= snake.elems[i].x -0.5 && head.y <= snake.elems[i].y +0.5 && head.y >= snake.elems[i].y -0.5){
+            return 1;
+        }
+    }
 
+/*
     if (mat[head.x][head.y]) {
 
         return 1;
 
     }
-
-    if (head.x == fruit.x && head.y == fruit.y) {
+*/
+    if (head.x <= fruit.x +0.5 && head.x >= fruit.x -0.5 && head.y <= fruit.y +0.5 && head.y >= fruit.y -0.5) { // head.x <= fruit.x +16 && head.x >= fruit.x -16
 
         next_fruit();
 
@@ -190,7 +201,7 @@ void pop_tail(void)
 
     snake.len--;
 
-    mat[tail.x][tail.y] = 0;
+    //mat[tail.x][tail.y] = 0;
 
 }
 
@@ -204,7 +215,7 @@ void push_head(void)
 
     snake.len++;
 
-    mat[head.x][head.y] = 1;
+    //mat[head.x][head.y] = 1;
 
 }
 
@@ -226,10 +237,10 @@ void next_fruit(void)
 
     do {
 
-        fruit.x = (fruit.x * 6 + 1) % (MAX_X + 1);
+        fruit.x = ((int)fruit.x * 6 + 1) % (MAX_X + 1);
 
-        fruit.y = (fruit.y * 16 + 1) % (MAX_Y + 1);
+        fruit.y = ((int)fruit.y * 16 + 1) % (MAX_Y + 1);
 
-    } while (mat[fruit.x][fruit.y]);
+    } while (mat[(int)fruit.x][(int)fruit.y]);
 
 }
