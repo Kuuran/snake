@@ -104,7 +104,7 @@ int update(void)
     head.y += sin(angle) * SPEED_SCALE;
 
 
-    if (head.x < -1 /*&& (angle <= M_PI/2 || angle >= -M_PI/2)*/) {
+    if (head.x < 0/*&& (angle <= M_PI/2 || angle >= -M_PI/2)*/) {
 
         head.x=MAX_X;
 
