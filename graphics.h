@@ -1,11 +1,15 @@
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
 
+#include "main.h"
+
+typedef struct tag_node node;
+
 void init(void);
 
 void render(void);
 
-void draw_body(void);
+void draw_body(node elmt);
 
 void draw_head(void);
 

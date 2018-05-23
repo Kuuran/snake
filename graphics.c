@@ -177,18 +177,33 @@ void init(void)
 void render(void)
 
 {
+    SDL_RenderClear(renderer);
 
-    if (snake.len > 1) {
+    for (int i = 0; i <= MAX_X; i++) {
 
-        draw_body();
+        for (int j = 0; j <= MAX_Y; j++) {
+
+            tail.x = i;
+
+            tail.y = j;
+
+            clear_tail();
+
+        }
 
     }
 
-    if (eaten) {
+    if (snake.len > 1) {
 
-        draw_fruit();
+    for (int i=0; i<snake.len-1; i++){
+        draw_body(snake.elems[i]);
+    }
 
-    } else {
+    }
+
+    draw_fruit();
+
+    if (!eaten) {
 
         clear_tail();
 
@@ -200,7 +215,7 @@ void render(void)
 
 }
 
-void draw_body(void)
+void draw_body(node elmt)
 
 {
 
@@ -210,9 +225,9 @@ void draw_body(void)
 
     rect.w = TILE_SIZE;
 
-    rect.x = body.x * TILE_SIZE;
+    rect.x = elmt.x * TILE_SIZE;
 
-    rect.y = body.y * TILE_SIZE;
+    rect.y = elmt.y * TILE_SIZE;
 
     SDL_RenderCopy(renderer, snake_texture, NULL, &rect);
 
