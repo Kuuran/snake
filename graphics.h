@@ -15,6 +15,8 @@ void draw_head(void);
 
 void draw_fruit(void);
 
+void draw_bombs();
+
 void clear_tail(void);
 
 #endif //GRAPHICS_H
