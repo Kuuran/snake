@@ -11,6 +11,8 @@ SDL_Surface*  shead_surface = NULL;
 
 SDL_Surface*  snake_surface = NULL;
 
+SDL_Surface*  bombs_surface = NULL;
+
 SDL_Texture*  field_texture = NULL;
 
 SDL_Texture*  fruit_texture = NULL;
@@ -18,6 +20,8 @@ SDL_Texture*  fruit_texture = NULL;
 SDL_Texture*  shead_texture = NULL;
 
 SDL_Texture*  snake_texture = NULL;
+
+SDL_Texture*  bombs_texture = NULL;
 
 
 
@@ -67,6 +71,13 @@ void init(void)
     shead_surface = SDL_LoadBMP("head.bmp");
 
     if(shead_surface==NULL)
+    {
+        fprintf(stderr, "SDL_Init: %s\n", SDL_GetError());
+    }
+
+    bombs_surface = SDL_LoadBMP("bomb.bmp");
+
+     if(bombs_surface==NULL)
     {
         fprintf(stderr, "SDL_Init: %s\n", SDL_GetError());
     }
