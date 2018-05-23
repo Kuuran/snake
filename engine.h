@@ -18,4 +18,6 @@ void gameover(void);
 
 void next_fruit(void);
 
+void next_bombs();
+
 #endif //ENGINE_H

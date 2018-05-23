@@ -172,7 +172,11 @@ void init(void)
 
     next_fruit();
 
+    next_bombs();
+
     eaten = 1;
+
+    bombed = 0;
 
     old_dir = 0;
 
@@ -203,11 +207,19 @@ void render(void)
 
     for (int i=0; i<snake.len-1; i++){
         draw_body(snake.elems[i]);
-    }
+        }
 
     }
 
     draw_fruit();
+
+    draw_bombs();
+
+    if(bombed){
+
+        pop_tail();
+
+    }
 
     if (!eaten) {
 
@@ -273,6 +285,21 @@ void draw_fruit(void)
 
     SDL_RenderCopy(renderer, fruit_texture, NULL, &rect);
 
+}
+
+void draw_bombs(){
+
+    SDL_Rect rect;
+
+    rect.h = TILE_SIZE;
+
+    rect.w = TILE_SIZE;
+
+    rect.x = bombs.x * TILE_SIZE;
+
+    rect.y = bombs.y * TILE_SIZE;
+
+    SDL_RenderCopy(renderer, bombs_texture, NULL, &rect);
 }
 
 void clear_tail(void)

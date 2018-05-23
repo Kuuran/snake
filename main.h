@@ -65,6 +65,8 @@ char old_dir;
 
 char eaten;
 
+char bombed;
+
 char mat[MAX_X+1][MAX_Y+1];
 
 
@@ -76,6 +78,8 @@ node head;
 node tail;
 
 node fruit;
+
+node bombs;
 
 
 queue snake;

@@ -81,10 +81,20 @@ int update(void) {
                 printf("Level 5\n");
                 break;
         }
-    } else {
+    } else if (head.x+0.5 <= bombs.x +1 && head.x+0.5 >= bombs.x && head.y-0.5 <= bombs.y && head.y-0.5 >= bombs.y -1) {
+
+        bombed=1;
+        next_bombs();
+        pop_tail();
+
+    }
+        else{
         pop_tail();
         eaten = 0;
+        bombed = 0;
     }
+
+
     push_head();
     return 0;
 }
@@ -117,8 +127,25 @@ void gameover(void) {
 }
 
 void next_fruit(void) {
+
+    mat[(int)fruit.x][(int)fruit.y]=0;
+
     do {
         fruit.x = ((int)fruit.x * 6 + 1) % (MAX_X + 1);
         fruit.y = ((int)fruit.y * 16 + 1) % (MAX_Y + 1);
     } while (mat[(int)fruit.x][(int)fruit.y]);
+    mat[(int)fruit.x][(int)fruit.y]=1;
+}
+
+void next_bombs(){
+
+    mat[(int)bombs.x][(int)bombs.y]=0;
+
+    do{
+
+        bombs.x = ((int)bombs.x * 4 + 1) % (MAX_X + 1);
+        bombs.y = ((int)bombs.y * 11 +2) % (MAX_Y + 1);
+
+    }while(mat[(int)bombs.x][(int)bombs.y]);
+    mat[(int)bombs.x][(int)bombs.y]=1;
 }
