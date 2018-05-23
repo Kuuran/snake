@@ -90,17 +90,24 @@ int update(void) {
 }
 
 void pop_tail(void) {
+
+
     tail = snake.elems[snake.first];
     snake.first = (snake.first + 1) % QUEUE_SIZE;
+
+
+    //snake.last = snake.last-1;
+
     snake.len--;
-    //mat[tail.x][tail.y] = 0;
 }
 
 void push_head(void) {
+    //TODO deplacement tous les 400 tiles
     snake.elems[snake.last] = head;
     snake.last = (snake.last + 1) % QUEUE_SIZE;
+
+
     snake.len++;
-    //mat[head.x][head.y] = 1;
 }
 
 void gameover(void) {
