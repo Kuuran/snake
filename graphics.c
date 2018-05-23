@@ -124,6 +124,12 @@ void init(void)
         fprintf(stderr, "SDL_Init: %s\n", SDL_GetError());
     }
 
+    bombs_texture = SDL_CreateTextureFromSurface(renderer, bombs_surface);
+    if(bombs_texture==NULL)
+    {
+        fprintf(stderr, "SDL_Init: %s\n", SDL_GetError());
+    }
+
     for (i = 0; i <= MAX_X; i++) {
 
         for (j = 0; j <= MAX_Y; j++) {
