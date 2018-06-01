@@ -139,8 +139,8 @@ void next_fruit(void) {
     mat[(int)fruit.x][(int)fruit.y]=0;
 
     do {
-        fruit.x = ((int)fruit.x * 6 + 1) % (MAX_X + 1);
-        fruit.y = ((int)fruit.y * 16 + 1) % (MAX_Y + 1);
+        fruit.x = ((int)fruit.x * 8 + 1) % (MAX_X + 1);
+        fruit.y = ((int)fruit.y * 12 + 1) % (MAX_Y + 1);
     } while (mat[(int)fruit.x][(int)fruit.y]);
     mat[(int)fruit.x][(int)fruit.y]=1;
 }
