@@ -36,11 +36,11 @@ void init(void)
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         fprintf(stderr, "SDL_Init: %s\n", SDL_GetError());
 
-    }
+}
 
     atexit(SDL_Quit);
 
-    wind = SDL_CreateWindowAndRenderer(800, 480, 0, &window, &renderer);
+    wind = SDL_CreateWindowAndRenderer(1920, 1080, 0, &window, &renderer);
     //SDL_SetVideoMode(640,480,32, SDL_DOUBLEBUF | SDL_HWSURFACE | SDL_RESIZABLE);
 
     if(wind!=0)
