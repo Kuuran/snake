@@ -238,7 +238,7 @@ void draw_body(node elmt){
     rect.w = TILE_SIZE;
 
     rect.x = elmt.x * TILE_SIZE;
-    printf("%d\n", elmt.x);
+
     rect.y = elmt.y * TILE_SIZE;
 
     SDL_RenderCopy(renderer, snake_texture, NULL, &rect);
