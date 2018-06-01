@@ -226,7 +226,8 @@ void render(void)
         clear_tail();
 
     }
-
+    push_head();
+    pop_tail();
     draw_head();
 
     SDL_RenderPresent(renderer);
