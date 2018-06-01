@@ -28,7 +28,7 @@
 
 #define MAX_X 24
 
-#define MAX_Y 14
+#define MAX_Y 18
 
 #define TILE_SIZE 32
 
