@@ -6,6 +6,8 @@ int *delay;
 
 SDL_Window *window;
 
+char fullscreen;
+
 void input(void);
 
 int  update(void);
