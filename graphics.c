@@ -25,9 +25,7 @@ SDL_Texture*  bombs_texture = NULL;
 
 
 
-void init(void)
-
-{
+void init(void){
 
     int i, j,wind;
 
@@ -40,7 +38,7 @@ void init(void)
 
     atexit(SDL_Quit);
 
-    wind = SDL_CreateWindowAndRenderer(1920, 1080, 0, &window, &renderer);
+    wind = SDL_CreateWindowAndRenderer(800, 480, 0, &window, &renderer);
     //SDL_SetVideoMode(640,480,32, SDL_DOUBLEBUF | SDL_HWSURFACE | SDL_RESIZABLE);
 
     if(wind!=0)
@@ -184,9 +182,7 @@ void init(void)
 
 }
 
-void render(void)
-
-{
+void render(void){
     SDL_RenderClear(renderer);
 
     for (int i = 0; i <= MAX_X; i++) {
@@ -205,9 +201,9 @@ void render(void)
 
     if (snake.len > 1) {
 
-    for (int i=0; i<snake.len-1; i++){
-        draw_body(snake.elems[i]);
-        }
+        for (int i=0; i<snake.len-1; i++){
+            draw_body(snake.elems[i]);
+            }
 
     }
 
@@ -217,7 +213,7 @@ void render(void)
 
     if(bombed){
 
-        pop_tail();
+        //pop_tail();
 
     }
 
@@ -226,17 +222,14 @@ void render(void)
         clear_tail();
 
     }
-    push_head();
-    pop_tail();
+
     draw_head();
 
     SDL_RenderPresent(renderer);
 
 }
 
-void draw_body(node elmt)
-
-{
+void draw_body(node elmt){
 
     SDL_Rect rect;
 
@@ -245,16 +238,14 @@ void draw_body(node elmt)
     rect.w = TILE_SIZE;
 
     rect.x = elmt.x * TILE_SIZE;
-
+    printf("%d\n", elmt.x);
     rect.y = elmt.y * TILE_SIZE;
 
     SDL_RenderCopy(renderer, snake_texture, NULL, &rect);
 
 }
 
-void draw_head(void)
-
-{
+void draw_head(void){
 
     SDL_Rect rect;
 
@@ -270,9 +261,7 @@ void draw_head(void)
 
 }
 
-void draw_fruit(void)
-
-{
+void draw_fruit(void){
 
     SDL_Rect rect;
 
@@ -303,9 +292,7 @@ void draw_bombs(){
     SDL_RenderCopy(renderer, bombs_texture, NULL, &rect);
 }
 
-void clear_tail(void)
-
-{
+void clear_tail(void){
     int erreur;
 
     SDL_Rect rect;

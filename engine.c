@@ -86,6 +86,7 @@ int update(void) {
         bombed=1;
         next_bombs();
         pop_tail();
+        pop_tail();
 
     }
         else{
