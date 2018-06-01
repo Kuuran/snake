@@ -38,7 +38,9 @@ void init(void){
 
     atexit(SDL_Quit);
 
-    wind = SDL_CreateWindowAndRenderer(800, 480, 0, &window, &renderer);
+
+    wind = SDL_CreateWindowAndRenderer(800, 576, 0, &window, &renderer);
+
     //SDL_SetVideoMode(640,480,32, SDL_DOUBLEBUF | SDL_HWSURFACE | SDL_RESIZABLE);
 
     if(wind!=0)
@@ -150,7 +152,7 @@ void init(void){
 
     // srand((unsigned) (NULL));
 
-    fruit.x = /*rand() % 16 +*/ 5;
+    fruit.x = /*rand() % 16 +*/ 4;
 
     fruit.y = /*rand() % 6 +*/ 5;
 

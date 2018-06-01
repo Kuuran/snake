@@ -22,9 +22,9 @@ void input(void) {
                 switch (event.key.keysym.sym)
                 {
                     case SDLK_f:
-                        SDL_RestoreWindow(window); //Incase it's maximized...
-                        SDL_SetWindowSize(window, dm.w, dm.h + 10);
-                        SDL_SetWindowPosition(window , SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+                        SDL_SetWindowFullscreen(window,1);
+
+                        SDL_RestoreWindow(window);
                 }
                 break;
         }
