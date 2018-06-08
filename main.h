@@ -86,7 +86,7 @@ node fruit;
 
 node bombs;
 
-
+node metafruit;
 
 
 queue snake;

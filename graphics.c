@@ -13,6 +13,8 @@ SDL_Surface*  snake_surface = NULL;
 
 SDL_Surface*  bombs_surface = NULL;
 
+SDL_Surface*  metafruit_surface = NULL;
+
 SDL_Surface*  wall_surface = NULL;
 
 SDL_Texture*  field_texture = NULL;
@@ -24,6 +26,8 @@ SDL_Texture*  shead_texture = NULL;
 SDL_Texture*  snake_texture = NULL;
 
 SDL_Texture*  bombs_texture = NULL;
+
+SDL_Texture*  metafruit_texture = NULL;
 
 SDL_Texture*  wall_texture = NULL;
 
@@ -302,6 +306,27 @@ void draw_bombs(){
     SDL_RenderCopy(renderer, bombs_texture, NULL, &rect);
 }
 
+void draw_mur(){
+
+    SDL_Rect rect;
+
+    rect.h = TILE_SIZE;
+
+    rect.w = TILE_SIZE;
+
+
+    for(int i = 0; i<NB_MUR;i++){
+
+
+    rect.x = bombs.x * TILE_SIZE;
+
+    rect.y = bombs.y * TILE_SIZE;
+
+    SDL_RenderCopy(renderer, wall_texture, NULL, &rect);
+    }
+}
+
+
 void clear_tail(void){
     int erreur;
 
@@ -333,5 +358,41 @@ void load_level(SDL_Surface* level_surface){
     field_surface = level_surface;
 
     field_texture = SDL_CreateTextureFromSurface(renderer, field_surface);
+
+}
+
+void load_head(SDL_Surface* head_surface){
+
+    shead_surface = head_surface;
+
+    shead_texture = SDL_CreateTextureFromSurface(renderer, shead_surface);
+
+
+}
+
+void load_body(SDL_Surface* body_surface){
+
+    snake_surface = body_surface;
+
+    snake_texture = SDL_CreateTextureFromSurface(renderer, snake_surface);
+
+
+}
+
+void load_apple(SDL_Surface* apple_surface){
+
+    fruit_surface = apple_surface;
+
+    fruit_texture = SDL_CreateTextureFromSurface(renderer, fruit_surface);
+
+
+}
+
+void load_metafruit(SDL_Surface* banana_surface){
+
+    metafruit_surface = banana_surface;
+
+    metafruit_texture = SDL_CreateTextureFromSurface(renderer, metafruit_surface);
+
 
 }

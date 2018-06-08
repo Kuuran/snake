@@ -17,6 +17,8 @@ void draw_fruit(void);
 
 void draw_bombs();
 
+void draw_mur();
+
 void clear_tail(void);
 
 void load_level(SDL_Surface* level_surface);

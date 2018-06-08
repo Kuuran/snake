@@ -227,3 +227,14 @@ void next_mur(){
 
     compteur_mur++;
 }
+
+void next_metafruit() {
+
+    mat[(int)metafruit.x][(int)metafruit.y]=0;
+
+    do {
+        metafruit.x = ((int)metafruit.x * 4 + 1) % (MAX_X + 1);
+        metafruit.y = ((int)metafruit.y * 21 + 1) % (MAX_Y + 1);
+    } while (mat[(int)metafruit.x][(int)metafruit.y]);
+    mat[(int)metafruit.x][(int)metafruit.y]=1;
+}
