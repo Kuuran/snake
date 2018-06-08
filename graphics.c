@@ -190,8 +190,8 @@ void init(void){
     compteur_mur = 0;
 
     for(int i = 0; i<NB_MUR;i++){
-        mur[i].x =(60 +2*i) %(MAX_X+1);
-        mur[i].y =(40 +i)%(MAX_Y+1);
+        mur[i].x =(60) %(MAX_X+1);
+        mur[i].y =(40)%(MAX_Y+1);
     }
 
     // srand((unsigned) (NULL));
