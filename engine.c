@@ -68,7 +68,7 @@ int update(void) {
 
     if (tmp.x+0.5 <= fruit.x +1 && tmp.x+0.5 >= fruit.x && tmp.y-0.5 <= fruit.y && tmp.y-0.5 >= fruit.y -1) { // head.x <= fruit.x +16 && head.x >= fruit.x -16
         next_fruit();
-        next_mur();
+        //next_mur();
         move(1,0);
         switch (snake.len) {
             case 10:
@@ -76,13 +76,18 @@ int update(void) {
                 *delay -= 2;
 
                 load_level(SDL_LoadBMP("lvl2.bmp"));
-
+                load_apple(SDL_LoadBMP("apple2.bmp"));
+                load_body(SDL_LoadBMP("snake2.bmp"));
+                load_head(SDL_LoadBMP("head2.bmp"));
                 printf("Level 2\n");
                 break;
             case 20:
                 *delay -= 2;
 
                 load_level(SDL_LoadBMP("lvl3.bmp"));
+                load_apple(SDL_LoadBMP("apple3.bmp"));
+                load_body(SDL_LoadBMP("snake3.bmp"));
+                load_head(SDL_LoadBMP("head3.bmp"));
 
                 printf("Level 3\n");
                 break;
@@ -90,6 +95,10 @@ int update(void) {
                 *delay /= 2;
 
                 load_level(SDL_LoadBMP("lvl4.bmp"));
+                load_apple(SDL_LoadBMP("apple4.bmp"));
+                load_body(SDL_LoadBMP("snake4.bmp"));
+                load_head(SDL_LoadBMP("head4.bmp"));
+                load_metafruit(SDL_LoadBMP("metafruit4.bmp"));
 
                 printf("Level 4\n");
                 break;
@@ -97,7 +106,10 @@ int update(void) {
                 *delay /= 2;
 
                 load_level(SDL_LoadBMP("spaaace.bmp"));
-
+                load_apple(SDL_LoadBMP("apple5.bmp"));
+                load_body(SDL_LoadBMP("snake5.bmp"));
+                load_head(SDL_LoadBMP("head5.bmp"));
+                load_metafruit(SDL_LoadBMP("metafruit5.bmp"));
                 printf("Level 5\n");
                 break;
             case 50:
@@ -225,7 +237,8 @@ void next_mur(){
     }while(mat[(int)mur[compteur_mur].x][(int)mur[compteur_mur].y]);
     mat[(int)mur[compteur_mur].x][(int)mur[compteur_mur].y]=1;
 
-    compteur_mur++;
+
+
 }
 
 void next_metafruit() {

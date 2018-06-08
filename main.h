@@ -43,7 +43,7 @@ typedef struct tag_node {
 
     double y;
 
-} node;
+}node;
 
 
 typedef struct tag_queue {
