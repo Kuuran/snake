@@ -66,6 +66,9 @@ int update(void) {
         switch (snake.len) {
             case 10:
                 *delay -= 2;
+
+                load_level(SDL_LoadBMP("field2.bmp"));
+
                 printf("Level 2\n");
                 break;
             case 20:
@@ -77,12 +80,20 @@ int update(void) {
                 break;
             case 30:
                 *delay /= 2;
+
+                load_level(SDL_LoadBMP("field2.bmp"));
+
                 printf("Level 4\n");
                 break;
             case 40:
                 *delay /= 2;
+
+                load_level(SDL_LoadBMP("field2.bmp"));
+
                 printf("Level 5\n");
                 break;
+            case 50:
+                victory();
         }
     } else if (tmp.x+0.5 <= bombs.x +1 && tmp.x+0.5 >= bombs.x && tmp.y-0.5 <= bombs.y && tmp.y-0.5 >= bombs.y -1) {
 
@@ -101,6 +112,13 @@ int update(void) {
 void victory(){
 
 
+
+    printf("Snake Length: %d\n", snake.len);
+
+    printf("VICTOIRE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+
+    exit(1);
 }
 
 
@@ -154,6 +172,7 @@ void move(int eaten, int bombed){
 
 
 void gameover(void) {
+
     printf("Snake Length: %d\n", snake.len);
     printf("Game Over\n");
 

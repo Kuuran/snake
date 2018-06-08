@@ -11,8 +11,6 @@
 
 #include <SDL2/SDL_mixer.h>
 
-#include <SDL2/SDL_ttf.h>
-
 #include <math.h>
 
 #include "engine.h"
@@ -30,11 +28,11 @@
 
 #define RIGHT 4
 
-#define MAX_X 24
+#define MAX_X 49
 
-#define MAX_Y 18
+#define MAX_Y 37
 
-#define TILE_SIZE 32
+#define TILE_SIZE 16
 
 #define SPEED_SCALE 1
 
