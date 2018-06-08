@@ -19,4 +19,6 @@ void draw_bombs();
 
 void clear_tail(void);
 
+void load_level(SDL_Surface* level_surface);
+
 #endif //GRAPHICS_H
