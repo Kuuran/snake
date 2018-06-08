@@ -47,29 +47,22 @@ void input(void) {
 }
 
 int update(void) {
-    body = head;
-    head.x += cos(angle) * SPEED_SCALE;
-    head.y += sin(angle) * SPEED_SCALE;
 
-    if (head.x < 0/*&& (angle <= M_PI/2 || angle >= -M_PI/2)*/) {
-        head.x=MAX_X;
-    }else if( head.x > MAX_X /*&& (angle >= M_PI/2 || angle <= -M_PI/2)*/){
-    head.x=0;
-    }else if( head.y < 0 /*&& (angle <= M_PI || angle >= 0)*/){
-    head.y=MAX_Y;
-    }else if( head.y > MAX_Y /*&& (angle >= M_PI || angle <= 0)*/){
-    head.y=0;
-    }
+    node tmp = head;
+
+    tmp.x += cos(angle) * SPEED_SCALE;
+    tmp.y += sin(angle) * SPEED_SCALE;
+
     // Detection des collisions
     for (int i = 0; i < snake.len-1; i++){
-        if (head.x+0.5 <= snake.elems[i].x +1 && head.x+0.5 >= snake.elems[i].x && head.y-0.5 <= snake.elems[i].y && head.y-0.5 >= snake.elems[i].y -1){
+        if (tmp.x+0.5 <= snake.elems[i].x +1 && tmp.x+0.5 >= snake.elems[i].x && tmp.y-0.5 <= snake.elems[i].y && tmp.y-0.5 >= snake.elems[i].y -1){
             return 1;
         }
     }
 
-    if (head.x+0.5 <= fruit.x +1 && head.x+0.5 >= fruit.x && head.y-0.5 <= fruit.y && head.y-0.5 >= fruit.y -1) { // head.x <= fruit.x +16 && head.x >= fruit.x -16
+    if (tmp.x+0.5 <= fruit.x +1 && tmp.x+0.5 >= fruit.x && tmp.y-0.5 <= fruit.y && tmp.y-0.5 >= fruit.y -1) { // head.x <= fruit.x +16 && head.x >= fruit.x -16
         next_fruit();
-        eaten = 1;
+        move(1,0);
         switch (snake.len) {
             case 10:
                 *delay -= 2;
@@ -91,31 +84,70 @@ int update(void) {
                 printf("Level 5\n");
                 break;
         }
-    } else if (head.x+0.5 <= bombs.x +1 && head.x+0.5 >= bombs.x && head.y-0.5 <= bombs.y && head.y-0.5 >= bombs.y -1) {
+    } else if (tmp.x+0.5 <= bombs.x +1 && tmp.x+0.5 >= bombs.x && tmp.y-0.5 <= bombs.y && tmp.y-0.5 >= bombs.y -1) {
 
-        bombed=1;
-        if(snake.len==0){
-            gameover();
-        }
+
         next_bombs();
-        pop_tail();
-        pop_tail();
+        move(0,1);
 
     }
         else{
-        pop_tail();
-        eaten = 0;
-        bombed = 0;
+        move(0,0);
     }
-
-
-    push_head();
     return 0;
 }
+
 
 void victory(){
 
 
+}
+
+
+void move(int eaten, int bombed){
+
+    if(eaten == 1){
+        snake.len ++;
+
+            for(int i=snake.len-1; i>0; i--){
+            snake.elems[i] = snake.elems[i-1];
+        }
+        snake.elems[0] = head;
+
+        head.x += cos(angle) * SPEED_SCALE;
+        head.y += sin(angle) * SPEED_SCALE;
+
+    }else if(bombed == 1){
+        snake.len --;
+        if (snake.len == 0) gameover();
+
+        for(int i=snake.len-1; i>0; i--){
+            snake.elems[i] = snake.elems[i-1];
+        }
+        snake.elems[0] = head;
+
+        head.x += cos(angle) * SPEED_SCALE;
+        head.y += sin(angle) * SPEED_SCALE;
+
+    }else{
+        for(int i=snake.len-1; i>0; i--){
+            snake.elems[i] = snake.elems[i-1];
+        }
+        snake.elems[0] = head;
+
+        head.x += cos(angle) * SPEED_SCALE;
+        head.y += sin(angle) * SPEED_SCALE;
+    }
+
+    if (head.x < 0) {
+        head.x=MAX_X;
+    }else if( head.x > MAX_X){
+    head.x=0;
+    }else if( head.y < 0){
+    head.y=MAX_Y;
+    }else if( head.y > MAX_Y){
+    head.y=0;
+    }
 
 }
 
