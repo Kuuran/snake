@@ -34,6 +34,8 @@
 
 #define SPEED_SCALE 1
 
+#define Nb_mur 10
+
 
 typedef struct tag_node {
 
@@ -69,6 +71,9 @@ char bombed;
 
 char mat[MAX_X+1][MAX_Y+1];
 
+node mur[Nb_mur];
+
+int compteur_mur;
 
 
 node body;
@@ -80,6 +85,8 @@ node tail;
 node fruit;
 
 node bombs;
+
+
 
 
 queue snake;

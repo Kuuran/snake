@@ -60,6 +60,12 @@ int update(void) {
         }
     }
 
+    for(int i = 0; i<NB_MUR;i++){
+        if (tmp.x+0.5 <= mur[i].x +1 && tmp.x+0.5 >= mur[i].x && tmp.y-0.5 <= mur[i].y && tmp.y-0.5 >= mur[i].y -1){
+            return 1;
+        }
+    }
+
     if (tmp.x+0.5 <= fruit.x +1 && tmp.x+0.5 >= fruit.x && tmp.y-0.5 <= fruit.y && tmp.y-0.5 >= fruit.y -1) { // head.x <= fruit.x +16 && head.x >= fruit.x -16
         next_fruit();
         move(1,0);
@@ -203,4 +209,19 @@ void next_bombs(){
 
     }while(mat[(int)bombs.x][(int)bombs.y]);
     mat[(int)bombs.x][(int)bombs.y]=1;
+}
+
+void next_mur(){
+
+    mat[(int)mur[compteur_mur].x][(int)mur[compteur_mur].y]=0;
+
+    do{
+
+        mur[compteur_mur].x = ((int)mur[compteur_mur].x * 7 + 1) % (MAX_X + 1);
+        mur[compteur_mur].y = ((int)mur[compteur_mur].y * 16 + 2 ) % (MAX_Y + 1);
+
+    }while(mat[(int)mur[compteur_mur].x][(int)mur[compteur_mur].y]);
+    mat[(int)mur[compteur_mur].x][(int)mur[compteur_mur].y]=1;
+
+    compteur_mur++;
 }

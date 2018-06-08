@@ -152,6 +152,15 @@ void init(void){
 
     snake.len = 0;
 
+    compteur_mur = 0;
+
+    for(int i = 0; i<Nb_mur;i++){
+
+        mur[i].x = 300;
+        mur[i].y = 200;
+
+    }
+
     // srand((unsigned) (NULL));
 
     fruit.x = /*rand() % 16 +*/ 4;
