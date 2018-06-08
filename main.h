@@ -9,10 +9,6 @@
 
 #include <SDL2/SDL.h>
 
-#include <sys/types.h>
-
-#include <sys/wait.h>
-
 #include <math.h>
 
 #include "engine.h"
