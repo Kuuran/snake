@@ -36,6 +36,8 @@
 
 #define NB_MUR 10
 
+#define NB_BOMBS 5
+
 
 typedef struct tag_node {
 
@@ -43,7 +45,7 @@ typedef struct tag_node {
 
     double y;
 
-} node;
+}node;
 
 
 typedef struct tag_queue {
@@ -84,7 +86,11 @@ node tail;
 
 node fruit;
 
-node bombs;
+node tmp;
+
+node bombs[NB_BOMBS];
+
+int compteur_bombes;
 
 node metafruit;
 

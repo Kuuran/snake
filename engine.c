@@ -48,7 +48,7 @@ void input(void) {
 
 int update(void) {
 
-    node tmp = head;
+    tmp = head;
 
     tmp.x += cos(angle) * SPEED_SCALE;
     tmp.y += sin(angle) * SPEED_SCALE;
@@ -69,6 +69,7 @@ int update(void) {
     if (tmp.x+0.5 <= fruit.x +1 && tmp.x+0.5 >= fruit.x && tmp.y-0.5 <= fruit.y && tmp.y-0.5 >= fruit.y -1) { // head.x <= fruit.x +16 && head.x >= fruit.x -16
         next_fruit();
         next_mur();
+        next_bombs();
         move(1,0);
         switch (snake.len) {
             case 10:
@@ -76,14 +77,18 @@ int update(void) {
                 *delay -= 2;
 
                 load_level(SDL_LoadBMP("lvl2.bmp"));
-
-
+                load_apple(SDL_LoadBMP("apple2.bmp"));
+                load_body(SDL_LoadBMP("snake2.bmp"));
+                load_head(SDL_LoadBMP("head2.bmp"));
                 printf("Level 2\n");
                 break;
             case 20:
                 *delay -= 2;
 
                 load_level(SDL_LoadBMP("lvl3.bmp"));
+                load_apple(SDL_LoadBMP("apple3.bmp"));
+                load_body(SDL_LoadBMP("snake3.bmp"));
+                load_head(SDL_LoadBMP("head3.bmp"));
 
                 printf("Level 3\n");
                 break;
@@ -91,6 +96,10 @@ int update(void) {
                 *delay /= 2;
 
                 load_level(SDL_LoadBMP("lvl4.bmp"));
+                load_apple(SDL_LoadBMP("apple4.bmp"));
+                load_body(SDL_LoadBMP("snake4.bmp"));
+                load_head(SDL_LoadBMP("head4.bmp"));
+                load_metafruit(SDL_LoadBMP("metafruit4.bmp"));
 
                 printf("Level 4\n");
                 break;
@@ -98,25 +107,33 @@ int update(void) {
                 *delay /= 2;
 
                 load_level(SDL_LoadBMP("spaaace.bmp"));
-
+                load_apple(SDL_LoadBMP("apple5.bmp"));
+                load_body(SDL_LoadBMP("snake5.bmp"));
+                load_head(SDL_LoadBMP("head5.bmp"));
+                load_metafruit(SDL_LoadBMP("metafruit5.bmp"));
                 printf("Level 5\n");
                 break;
             case 50:
                 victory();
         }
-    } else if (tmp.x+0.5 <= bombs.x +1 && tmp.x+0.5 >= bombs.x && tmp.y-0.5 <= bombs.y && tmp.y-0.5 >= bombs.y -1) {
-
+    } else if(bombe() == 1){
 
         next_bombs();
         move(0,1);
-
-    }
-        else{
+        }else{
         move(0,0);
     }
     return 0;
 }
 
+int bombe(){
+    for (int j = 0; j<NB_BOMBS; j++) {
+        if (tmp.x+0.5 <= bombs[j].x +1 && tmp.x+0.5 >= bombs[j].x && tmp.y-0.5 <= bombs[j].y && tmp.y-0.5 >= bombs[j].y -1) {
+                return 1;
+        }
+    }
+    return 0;
+}
 
 void victory(){
 
@@ -203,15 +220,17 @@ void next_fruit(void) {
 
 void next_bombs(){
 
-    mat[(int)bombs.x][(int)bombs.y]=0;
+    mat[(int)bombs[compteur_bombes].x][(int)bombs[compteur_bombes].y]=0;
 
     do{
 
-        bombs.x = ((int)bombs.x * 4 + 1) % (MAX_X + 1);
-        bombs.y = ((int)bombs.y * 11 +2) % (MAX_Y + 1);
+        bombs[compteur_bombes].x = ((int)bombs[compteur_bombes].x * 4 + 1) % (MAX_X + 1);
+        bombs[compteur_bombes].y = ((int)bombs[compteur_bombes].y * 11 +2) % (MAX_Y + 1);
 
-    }while(mat[(int)bombs.x][(int)bombs.y]);
-    mat[(int)bombs.x][(int)bombs.y]=1;
+    }while(mat[(int)bombs[compteur_bombes].x][(int)bombs[compteur_bombes].y]);
+    mat[(int)bombs[compteur_bombes].x][(int)bombs[compteur_bombes].y]=1;
+
+    compteur_bombes = (compteur_bombes + 1)%NB_BOMBS;
 }
 
 void next_mur(){

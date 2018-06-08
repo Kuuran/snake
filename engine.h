@@ -28,4 +28,6 @@ void next_mur();
 
 void next_bombs();
 
+int bombe();
+
 #endif //ENGINE_H

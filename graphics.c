@@ -73,7 +73,14 @@ void init(void){
     for (int i=0; i<snake.len-1; i++){
         draw_body(snake.elems[i]);
     }
+
     if(fruit_surface==NULL)
+    {
+        fprintf(stderr, "SDL_Init: %s\n", SDL_GetError());
+    }
+
+     metafruit_surface = SDL_LoadBMP("metafruit3.bmp");
+    if(metafruit_surface==NULL)
     {
         fprintf(stderr, "SDL_Init: %s\n", SDL_GetError());
     }
@@ -116,6 +123,13 @@ void init(void){
     fruit_texture = SDL_CreateTextureFromSurface(renderer, fruit_surface);
 
     if(fruit_texture==NULL)
+    {
+        fprintf(stderr, "SDL_Init: %s\n", SDL_GetError());
+    }
+
+    metafruit_texture = SDL_CreateTextureFromSurface(renderer, metafruit_surface);
+
+    if(metafruit_texture==NULL)
     {
         fprintf(stderr, "SDL_Init: %s\n", SDL_GetError());
     }
@@ -176,11 +190,8 @@ void init(void){
     compteur_mur = 0;
 
     for(int i = 0; i<NB_MUR;i++){
-
-        mur[i].x = (int)rand()%700;
-        mur[i].y = (int)rand()%450;
-        mat[(int)mur[i].x][(int)mur[i].y]=1;
-
+        mur[i].x =(60 +2*i) %(MAX_X+1);
+        mur[i].y =(40 +i)%(MAX_Y+1);
     }
 
     // srand((unsigned) (NULL));
@@ -203,6 +214,7 @@ void init(void){
 
     next_fruit();
 
+    compteur_bombes = 0;
     next_bombs();
 
     printf("Level 1\n");
@@ -237,6 +249,8 @@ void render(void){
     draw_fruit();
 
     draw_bombs();
+
+    draw_mur();
 
     draw_head();
 
@@ -300,11 +314,14 @@ void draw_bombs(){
 
     rect.w = TILE_SIZE;
 
-    rect.x = bombs.x * TILE_SIZE;
 
-    rect.y = bombs.y * TILE_SIZE;
+    for(int i = 0; i<NB_BOMBS; i++){
+    rect.x = bombs[i].x * TILE_SIZE;
+
+    rect.y = bombs[i].y * TILE_SIZE;
 
     SDL_RenderCopy(renderer, bombs_texture, NULL, &rect);
+    }
 }
 
 void draw_mur(){
@@ -319,14 +336,30 @@ void draw_mur(){
     for(int i = 0; i<NB_MUR;i++){
 
 
-    rect.x = bombs.x * TILE_SIZE;
+    rect.x = mur[i].x * TILE_SIZE;
 
-    rect.y = bombs.y * TILE_SIZE;
+    rect.y = mur[i].y * TILE_SIZE;
 
     SDL_RenderCopy(renderer, wall_texture, NULL, &rect);
     }
 }
 
+void draw_metafruit(){
+
+    SDL_Rect rect;
+
+    rect.h = TILE_SIZE;
+
+    rect.w = TILE_SIZE;
+
+    rect.x = metafruit.x * TILE_SIZE;
+
+    rect.y = metafruit.y * TILE_SIZE;
+
+    SDL_RenderCopy(renderer, metafruit_texture, NULL, &rect);
+
+
+}
 
 void clear_tail(void){
     int erreur;
@@ -358,16 +391,34 @@ void load_level(SDL_Surface* level_surface){
 
     field_surface = level_surface;
 
+     if(field_surface==NULL)
+    {
+        fprintf(stderr, "load level: %s\n", SDL_GetError());
+    }
+
     field_texture = SDL_CreateTextureFromSurface(renderer, field_surface);
 
+    if(field_texture==NULL)
+    {
+        fprintf(stderr, "load level: %s\n", SDL_GetError());
+    }
 }
 
 void load_head(SDL_Surface* head_surface){
 
     shead_surface = head_surface;
 
+     if(shead_surface==NULL)
+    {
+        fprintf(stderr, "load head: %s\n", SDL_GetError());
+    }
+
     shead_texture = SDL_CreateTextureFromSurface(renderer, shead_surface);
 
+    if(shead_texture==NULL)
+    {
+        fprintf(stderr, "load head: %s\n", SDL_GetError());
+    }
 
 }
 
@@ -375,8 +426,17 @@ void load_body(SDL_Surface* body_surface){
 
     snake_surface = body_surface;
 
+    if(snake_surface==NULL)
+    {
+        fprintf(stderr, "load body: %s\n", SDL_GetError());
+    }
+
     snake_texture = SDL_CreateTextureFromSurface(renderer, snake_surface);
 
+    if(snake_texture==NULL)
+    {
+        fprintf(stderr, "load body: %s\n", SDL_GetError());
+    }
 
 }
 
@@ -384,8 +444,17 @@ void load_apple(SDL_Surface* apple_surface){
 
     fruit_surface = apple_surface;
 
+    if(fruit_surface==NULL)
+    {
+        fprintf(stderr, "load apple: %s\n", SDL_GetError());
+    }
+
     fruit_texture = SDL_CreateTextureFromSurface(renderer, fruit_surface);
 
+    if(fruit_texture==NULL)
+    {
+        fprintf(stderr, "load apple: %s\n", SDL_GetError());
+    }
 
 }
 
@@ -393,7 +462,15 @@ void load_metafruit(SDL_Surface* banana_surface){
 
     metafruit_surface = banana_surface;
 
+    if(metafruit_surface==NULL)
+    {
+        fprintf(stderr, "load meta: %s\n", SDL_GetError());
+    }
+
     metafruit_texture = SDL_CreateTextureFromSurface(renderer, metafruit_surface);
 
-
+    if(metafruit_texture==NULL)
+    {
+        fprintf(stderr, "load meta: %s\n", SDL_GetError());
+    }
 }
