@@ -12,19 +12,26 @@ void input(void) {
     } else if (state[SDL_SCANCODE_ESCAPE]) {
         exit(0);
     }
-     SDL_Event event;
 
-    if (SDL_PollEvent(&event))
+    SDL_Event event;
+    while (SDL_PollEvent(&event)) // Récupération des actions de l'utilisateur
     {
-        switch (event.type)
+        switch(event.type)
         {
-            case SDL_KEYUP:
-                switch (event.key.keysym.sym)
+            case SDL_KEYUP: // Relâchement d'une touche
+                if ( event.key.keysym.sym == SDLK_f ) // Touche f
                 {
-                    case SDLK_f:
-                        SDL_SetWindowFullscreen(window,1);
-
-                        SDL_RestoreWindow(window);
+                    // Alterne du mode plein écran au mode fenêtré
+                    if ( fullscreen == 0 )
+                    {
+                        fullscreen = 1;
+                        SDL_SetWindowFullscreen(window,SDL_WINDOW_FULLSCREEN);
+                    }
+                    else if ( fullscreen == 1 )
+                    {
+                        fullscreen = 0;
+                        SDL_SetWindowFullscreen(window,0);
+                    }
                 }
                 break;
         }
@@ -133,8 +140,8 @@ void next_fruit(void) {
     mat[(int)fruit.x][(int)fruit.y]=0;
 
     do {
-        fruit.x = ((int)fruit.x * 6 + 1) % (MAX_X + 1);
-        fruit.y = ((int)fruit.y * 16 + 1) % (MAX_Y + 1);
+        fruit.x = ((int)fruit.x * 8 + 1) % (MAX_X + 1);
+        fruit.y = ((int)fruit.y * 12 + 1) % (MAX_Y + 1);
     } while (mat[(int)fruit.x][(int)fruit.y]);
     mat[(int)fruit.x][(int)fruit.y]=1;
 }
