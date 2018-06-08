@@ -97,7 +97,6 @@ int update(void) {
 }
 
 void move(int eaten, int bombed){
-
     if(eaten == 1){
         snake.len ++;
 
@@ -111,7 +110,7 @@ void move(int eaten, int bombed){
 
     }else if(bombed == 1){
         snake.len --;
-        if (snake.len == 0) gameover();
+        if (snake.len == -1) gameover();
 
         for(int i=snake.len-1; i>0; i--){
             snake.elems[i] = snake.elems[i-1];
@@ -120,6 +119,8 @@ void move(int eaten, int bombed){
 
         head.x += cos(angle) * SPEED_SCALE;
         head.y += sin(angle) * SPEED_SCALE;
+
+        //snake.elems[snake.len] = NULL;
 
     }else{
         for(int i=snake.len-1; i>0; i--){
@@ -143,27 +144,6 @@ void move(int eaten, int bombed){
 
 }
 
-void pop_tail(void) {
-
-    tail = snake.elems[snake.first];
-    snake.first = (snake.first + 1) % QUEUE_SIZE;
-    //snake.last = snake.last-1;
-
-    snake.len--;
-}
-
-void push_head(void) {
-    //TODO deplacement tous les 400 tiles
-    snake.elems[snake.last] = head;
-    snake.last = (snake.last + 1) % QUEUE_SIZE;
-
-
-    //for(int i=0; i<QUEUE_SIZE-1; i++){
-
-    //}
-
-    snake.len++;
-}
 
 void gameover(void) {
     printf("Snake Length: %d\n", snake.len);

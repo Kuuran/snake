@@ -62,9 +62,9 @@ void init(void){
     SDL_RenderPresent(renderer);
 
     fruit_surface = SDL_LoadBMP("apple.bmp");
-for (int i=snake.first; i<snake.last + snake.len; i++){
-            draw_body(snake.elems[i]);
-            }
+    for (int i=0; i<snake.len-1; i++){
+        draw_body(snake.elems[i]);
+    }
     if(fruit_surface==NULL)
     {
         fprintf(stderr, "SDL_Init: %s\n", SDL_GetError());
@@ -170,17 +170,9 @@ for (int i=snake.first; i<snake.last + snake.len; i++){
 
     }
 
-    push_head();
-
     next_fruit();
 
     next_bombs();
-
-    eaten = 1;
-
-    bombed = 0;
-
-    old_dir = 0;
 
     printf("Level 1\n");
 
@@ -203,9 +195,9 @@ void render(void){
 
     }
 
-    if (snake.len > 1) {
+    if (snake.len > 0) {
 
-        for (int i=snake.first; i<snake.last + snake.len; i++){
+        for (int i=0; i<snake.len; i++){
             draw_body(snake.elems[i]);
             }
 
@@ -214,12 +206,6 @@ void render(void){
     draw_fruit();
 
     draw_bombs();
-
-    if (!eaten) {
-
-        clear_tail();
-
-    }
 
     draw_head();
 
