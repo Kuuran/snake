@@ -67,6 +67,9 @@ int update(void) {
             case 10:
                 *delay -= 2;
                 printf("Level 2\n");
+
+                load_level("lvl2.bmp");
+
                 break;
             case 20:
                 *delay -= 2;

@@ -82,6 +82,7 @@ node fruit;
 node bombs;
 
 
+
 queue snake;
 
 #endif //MAIN_H
