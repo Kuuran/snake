@@ -86,6 +86,7 @@ int update(void) {
         }
     } else if (tmp.x+0.5 <= bombs.x +1 && tmp.x+0.5 >= bombs.x && tmp.y-0.5 <= bombs.y && tmp.y-0.5 >= bombs.y -1) {
 
+
         next_bombs();
         move(0,1);
 
@@ -95,6 +96,13 @@ int update(void) {
     }
     return 0;
 }
+
+
+void victory(){
+
+
+}
+
 
 void move(int eaten, int bombed){
     if(eaten == 1){
@@ -148,6 +156,9 @@ void move(int eaten, int bombed){
 void gameover(void) {
     printf("Snake Length: %d\n", snake.len);
     printf("Game Over\n");
+
+
+
     exit(0);
 }
 
