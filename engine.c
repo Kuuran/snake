@@ -72,6 +72,7 @@ int update(void) {
         move(1,0);
         switch (snake.len) {
             case 10:
+
                 *delay -= 2;
 
                 load_level(SDL_LoadBMP("lvl2.bmp"));
