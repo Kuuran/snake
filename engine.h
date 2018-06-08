@@ -28,6 +28,8 @@ void next_mur();
 
 void next_bombs();
 
+void next_metafruit();
+
 int bombe();
 
 #endif //ENGINE_H

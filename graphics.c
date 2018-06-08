@@ -189,6 +189,8 @@ void init(void){
 
     compteur_mur = 0;
 
+    meta = 0;
+
     for(int i = 0; i<NB_MUR;i++){
         mur[i].x =(60) %(MAX_X+1);
         mur[i].y =(40)%(MAX_Y+1);
@@ -253,6 +255,10 @@ void render(void){
     draw_mur();
 
     draw_head();
+
+    if(meta == 1 || meta == 2 || meta == 3){
+        draw_metafruit();
+    }
 
     SDL_RenderPresent(renderer);
 

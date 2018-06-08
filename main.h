@@ -94,6 +94,8 @@ int compteur_bombes;
 
 node metafruit;
 
+int meta;
+
 
 queue snake;
 

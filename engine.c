@@ -55,20 +55,26 @@ int update(void) {
 
     // Detection des collisions
     for (int i = 0; i < snake.len-1; i++){
-        if (tmp.x+0.5 <= snake.elems[i].x +1 && tmp.x+0.5 >= snake.elems[i].x && tmp.y-0.5 <= snake.elems[i].y && tmp.y-0.5 >= snake.elems[i].y -1){
+        if (tmp.x+0.5 <= snake.elems[i].x +1 && tmp.x+0.5 >= snake.elems[i].x && tmp.y-0.5 <= snake.elems[i].y && tmp.y-0.5 >= snake.elems[i].y -1 && meta !=4){
             return 1;
+        }
+        if (tmp.x+0.5 <= snake.elems[i].x +1 && tmp.x+0.5 >= snake.elems[i].x && tmp.y-0.5 <= snake.elems[i].y && tmp.y-0.5 >= snake.elems[i].y -1 && meta ==4){
+            meta = 0;
         }
     }
 
     for(int i = 0; i<NB_MUR;i++){
-        if (tmp.x+0.5 <= mur[i].x +1 && tmp.x+0.5 >= mur[i].x && tmp.y-0.5 <= mur[i].y && tmp.y-0.5 >= mur[i].y -1){
+        if (tmp.x+0.5 <= mur[i].x +1 && tmp.x+0.5 >= mur[i].x && tmp.y-0.5 <= mur[i].y && tmp.y-0.5 >= mur[i].y -1 && meta !=4){
             return 1;
+        }
+        if (tmp.x+0.5 <= mur[i].x +1 && tmp.x+0.5 >= mur[i].x && tmp.y-0.5 <= mur[i].y && tmp.y-0.5 >= mur[i].y -1 && meta ==4){
+            meta = 0;
         }
     }
 
     if (tmp.x+0.5 <= fruit.x +1 && tmp.x+0.5 >= fruit.x && tmp.y-0.5 <= fruit.y && tmp.y-0.5 >= fruit.y -1) { // head.x <= fruit.x +16 && head.x >= fruit.x -16
         next_fruit();
-        next_mur();
+        //next_mur();
         next_bombs();
         move(1,0);
         switch (snake.len) {
@@ -89,6 +95,8 @@ int update(void) {
                 load_apple(SDL_LoadBMP("apple3.bmp"));
                 load_body(SDL_LoadBMP("snake3.bmp"));
                 load_head(SDL_LoadBMP("head3.bmp"));
+                meta = 1;
+                next_metafruit();
 
                 printf("Level 3\n");
                 break;
@@ -100,6 +108,8 @@ int update(void) {
                 load_body(SDL_LoadBMP("snake4.bmp"));
                 load_head(SDL_LoadBMP("head4.bmp"));
                 load_metafruit(SDL_LoadBMP("metafruit4.bmp"));
+                meta = 2;
+                next_metafruit();
 
                 printf("Level 4\n");
                 break;
@@ -111,16 +121,28 @@ int update(void) {
                 load_body(SDL_LoadBMP("snake5.bmp"));
                 load_head(SDL_LoadBMP("head5.bmp"));
                 load_metafruit(SDL_LoadBMP("metafruit5.bmp"));
+                meta = 3;
+                next_metafruit();
                 printf("Level 5\n");
                 break;
             case 50:
                 victory();
         }
-    } else if(bombe() == 1){
+    } else if(bombe() == 1 && meta != 4){
 
         next_bombs();
         move(0,1);
-        }else{
+    }else if (bombe() == 1 && meta == 4){
+        meta = 0;
+        move(0,0);
+    }else if (tmp.x+0.5 <= fruit.x +1 && tmp.x+0.5 >= fruit.x && tmp.y-0.5 <= fruit.y && tmp.y-0.5 >= fruit.y -1){
+        if (meta == 1) load_head(SDL_LoadBMP("headinv3.bmp"));
+        if (meta == 2) load_head(SDL_LoadBMP("headinv4.bmp"));
+        if (meta == 3) load_head(SDL_LoadBMP("headinv5.bmp"));
+
+        meta = 4;
+
+    }else{
         move(0,0);
     }
     return 0;
@@ -253,8 +275,8 @@ void next_metafruit() {
     mat[(int)metafruit.x][(int)metafruit.y]=0;
 
     do {
-        metafruit.x = ((int)metafruit.x * 4 + 1) % (MAX_X + 1);
-        metafruit.y = ((int)metafruit.y * 21 + 1) % (MAX_Y + 1);
+        metafruit.x = ((int)metafruit.x * 4 + 20) % (MAX_X + 1);
+        metafruit.y = ((int)metafruit.y * 21 + 20) % (MAX_Y + 1);
     } while (mat[(int)metafruit.x][(int)metafruit.y]);
     mat[(int)metafruit.x][(int)metafruit.y]=1;
 }
