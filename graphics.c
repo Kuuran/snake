@@ -13,6 +13,8 @@ SDL_Surface*  snake_surface = NULL;
 
 SDL_Surface*  bombs_surface = NULL;
 
+SDL_Surface*  wall_surface = NULL;
+
 SDL_Texture*  field_texture = NULL;
 
 SDL_Texture*  fruit_texture = NULL;
@@ -22,6 +24,8 @@ SDL_Texture*  shead_texture = NULL;
 SDL_Texture*  snake_texture = NULL;
 
 SDL_Texture*  bombs_texture = NULL;
+
+SDL_Texture*  wall_texture = NULL;
 
 
 
@@ -84,6 +88,13 @@ void init(void){
         fprintf(stderr, "SDL_Init: %s\n", SDL_GetError());
     }
 
+     wall_surface = SDL_LoadBMP("wall.bmp");
+
+     if(wall_surface==NULL)
+    {
+        fprintf(stderr, "SDL_Init: %s\n", SDL_GetError());
+    }
+
     snake_surface = SDL_LoadBMP("snake.bmp");
 
     if(snake_surface==NULL)
@@ -132,6 +143,12 @@ void init(void){
         fprintf(stderr, "SDL_Init: %s\n", SDL_GetError());
     }
 
+     wall_texture = SDL_CreateTextureFromSurface(renderer, wall_surface);
+    if(wall_texture==NULL)
+    {
+        fprintf(stderr, "SDL_Init: %s\n", SDL_GetError());
+    }
+
     for (i = 0; i <= MAX_X; i++) {
 
         for (j = 0; j <= MAX_Y; j++) {
@@ -154,7 +171,7 @@ void init(void){
 
     compteur_mur = 0;
 
-    for(int i = 0; i<Nb_mur;i++){
+    for(int i = 0; i<NB_MUR;i++){
 
         mur[i].x = 300;
         mur[i].y = 200;

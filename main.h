@@ -34,7 +34,7 @@
 
 #define SPEED_SCALE 1
 
-#define Nb_mur 10
+#define NB_MUR 10
 
 
 typedef struct tag_node {
@@ -71,7 +71,7 @@ char bombed;
 
 char mat[MAX_X+1][MAX_Y+1];
 
-node mur[Nb_mur];
+node mur[NB_MUR];
 
 int compteur_mur;
 

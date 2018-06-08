@@ -24,6 +24,8 @@ void move(int eaten,int bombed);
 
 void victory();
 
+void next_mur();
+
 void next_bombs();
 
 #endif //ENGINE_H

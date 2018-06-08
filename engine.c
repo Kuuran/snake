@@ -68,6 +68,7 @@ int update(void) {
 
     if (tmp.x+0.5 <= fruit.x +1 && tmp.x+0.5 >= fruit.x && tmp.y-0.5 <= fruit.y && tmp.y-0.5 >= fruit.y -1) { // head.x <= fruit.x +16 && head.x >= fruit.x -16
         next_fruit();
+        next_mur();
         move(1,0);
         switch (snake.len) {
             case 10:
