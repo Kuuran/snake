@@ -115,11 +115,8 @@ int update(void) {
 
 void pop_tail(void) {
 
-
     tail = snake.elems[snake.first];
     snake.first = (snake.first + 1) % QUEUE_SIZE;
-
-
     //snake.last = snake.last-1;
 
     snake.len--;
@@ -130,6 +127,10 @@ void push_head(void) {
     snake.elems[snake.last] = head;
     snake.last = (snake.last + 1) % QUEUE_SIZE;
 
+
+    //for(int i=0; i<QUEUE_SIZE-1; i++){
+
+    //}
 
     snake.len++;
 }
