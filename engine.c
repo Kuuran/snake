@@ -68,7 +68,7 @@ int update(void) {
 
     if (tmp.x+0.5 <= fruit.x +1 && tmp.x+0.5 >= fruit.x && tmp.y-0.5 <= fruit.y && tmp.y-0.5 >= fruit.y -1) { // head.x <= fruit.x +16 && head.x >= fruit.x -16
         next_fruit();
-        //next_mur();
+        next_mur();
         move(1,0);
         switch (snake.len) {
             case 10:
@@ -237,7 +237,10 @@ void next_mur(){
     }while(mat[(int)mur[compteur_mur].x][(int)mur[compteur_mur].y]);
     mat[(int)mur[compteur_mur].x][(int)mur[compteur_mur].y]=1;
 
-
+    compteur_mur++;
+    if(compteur_mur==10){
+        compteur_mur=0;
+    }
 
 }
 

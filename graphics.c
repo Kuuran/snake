@@ -191,8 +191,8 @@ void init(void){
 
     for(int i = 0; i<NB_MUR;i++){
 
-        mur[i].x = 300;
-        mur[i].y = 200;
+        mur[i].x =(60 +2*i) %(MAX_X+1);
+        mur[i].y =(40 +i)%(MAX_Y+1);
 
     }
 
@@ -250,6 +250,8 @@ void render(void){
     draw_fruit();
 
     draw_bombs();
+
+    draw_mur();
 
     draw_head();
 
@@ -332,9 +334,9 @@ void draw_mur(){
     for(int i = 0; i<NB_MUR;i++){
 
 
-    rect.x = bombs.x * TILE_SIZE;
+    rect.x = mur[i].x * TILE_SIZE;
 
-    rect.y = bombs.y * TILE_SIZE;
+    rect.y = mur[i].y * TILE_SIZE;
 
     SDL_RenderCopy(renderer, wall_texture, NULL, &rect);
     }
