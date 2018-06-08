@@ -319,3 +319,11 @@ void clear_tail(void){
      SDL_RenderFillRect(renderer, &rect); */
 
 }
+
+void load_level(SDL_Surface* level_surface){
+
+    field_surface = level_surface;
+
+    field_texture = SDL_CreateTextureFromSurface(renderer, field_surface);
+
+}

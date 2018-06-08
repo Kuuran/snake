@@ -2,7 +2,6 @@
 
 void input(void) {
     const Uint8 *state = SDL_GetKeyboardState(NULL);
-    SDL_DisplayMode dm;
 
     SDL_PumpEvents();
     if (state[SDL_SCANCODE_LEFT] || state[SDL_SCANCODE_A]) {
@@ -12,6 +11,7 @@ void input(void) {
     } else if (state[SDL_SCANCODE_ESCAPE]) {
         exit(0);
     }
+
 
     SDL_Event event;
     while (SDL_PollEvent(&event)) // Récupération des actions de l'utilisateur
@@ -77,6 +77,9 @@ int update(void) {
                 break;
             case 20:
                 *delay -= 2;
+
+                load_level(SDL_LoadBMP("field2.bmp"));
+
                 printf("Level 3\n");
                 break;
             case 30:
@@ -91,6 +94,9 @@ int update(void) {
     } else if (head.x+0.5 <= bombs.x +1 && head.x+0.5 >= bombs.x && head.y-0.5 <= bombs.y && head.y-0.5 >= bombs.y -1) {
 
         bombed=1;
+        if(snake.len==1){
+            gameover();
+        }
         next_bombs();
         pop_tail();
         pop_tail();
