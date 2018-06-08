@@ -88,7 +88,7 @@ int update(void) {
             case 40:
                 *delay /= 2;
 
-                load_level(SDL_LoadBMP("field2.bmp"));
+                load_level(SDL_LoadBMP("spaaace.bmp"));
 
                 printf("Level 5\n");
                 break;
