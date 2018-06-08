@@ -67,21 +67,21 @@ int update(void) {
             case 10:
                 *delay -= 2;
 
-                load_level(SDL_LoadBMP("field2.bmp"));
+                load_level(SDL_LoadBMP("lvl2.bmp"));
 
                 printf("Level 2\n");
                 break;
             case 20:
                 *delay -= 2;
 
-                load_level(SDL_LoadBMP("field2.bmp"));
+                load_level(SDL_LoadBMP("lvl3.bmp"));
 
                 printf("Level 3\n");
                 break;
             case 30:
                 *delay /= 2;
 
-                load_level(SDL_LoadBMP("field2.bmp"));
+                load_level(SDL_LoadBMP("lvl4.bmp"));
 
                 printf("Level 4\n");
                 break;
