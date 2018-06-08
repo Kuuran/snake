@@ -3,14 +3,14 @@ CFLAGS=-Wall
 
 all: snake
 
-main.o: main.h engine.h graphics.h engine.o graphics.o
+main.o: main.c
 	$(CC) $(CFLAGS) -c main.c
-engine.o: engine.h graphics.h main.h engine.o
+engine.o: engine.c
 	$(CC) $(CFLAGS) -c engine.c
-graphics.o: engine.h graphics.h main.h engine.o
+graphics.o: graphics.c
 	$(CC) $(CFLAGS) -c graphics.c
 snake: main.o engine.o graphics.o
-	$(CC) $(CFLAGS) main.o engine.o graphics.o -lSDL2 -o snake
+	$(CC) $(CFLAGS) main.o engine.o graphics.o -lSDL2 -lSDL2main -o snake
 
 clean:
     rm -f *.o
