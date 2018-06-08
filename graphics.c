@@ -62,7 +62,9 @@ void init(void){
     SDL_RenderPresent(renderer);
 
     fruit_surface = SDL_LoadBMP("apple.bmp");
-
+for (int i=snake.first; i<snake.last + snake.len; i++){
+            draw_body(snake.elems[i]);
+            }
     if(fruit_surface==NULL)
     {
         fprintf(stderr, "SDL_Init: %s\n", SDL_GetError());
@@ -203,7 +205,7 @@ void render(void){
 
     if (snake.len > 1) {
 
-        for (int i=0; i<snake.len-1; i++){
+        for (int i=snake.first; i<snake.last + snake.len; i++){
             draw_body(snake.elems[i]);
             }
 
@@ -212,12 +214,6 @@ void render(void){
     draw_fruit();
 
     draw_bombs();
-
-    if(bombed){
-
-        //pop_tail();
-
-    }
 
     if (!eaten) {
 
