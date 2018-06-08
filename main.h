@@ -96,6 +96,8 @@ node metafruit;
 
 int meta;
 
+int lvl;
+
 
 queue snake;
 

@@ -58,25 +58,39 @@ int update(void) {
         if (tmp.x+0.5 <= snake.elems[i].x +1 && tmp.x+0.5 >= snake.elems[i].x && tmp.y-0.5 <= snake.elems[i].y && tmp.y-0.5 >= snake.elems[i].y -1 && meta !=4){
             return 1;
         }
-        if (tmp.x+0.5 <= snake.elems[i].x +1 && tmp.x+0.5 >= snake.elems[i].x && tmp.y-0.5 <= snake.elems[i].y && tmp.y-0.5 >= snake.elems[i].y -1 && meta ==4){
-            meta = 0;
-        }
     }
 
     for(int i = 0; i<NB_MUR;i++){
         if (tmp.x+0.5 <= mur[i].x +1 && tmp.x+0.5 >= mur[i].x && tmp.y-0.5 <= mur[i].y && tmp.y-0.5 >= mur[i].y -1 && meta !=4){
             return 1;
         }
-        if (tmp.x+0.5 <= mur[i].x +1 && tmp.x+0.5 >= mur[i].x && tmp.y-0.5 <= mur[i].y && tmp.y-0.5 >= mur[i].y -1 && meta ==4){
-            meta = 0;
-        }
     }
 
     if (tmp.x+0.5 <= fruit.x +1 && tmp.x+0.5 >= fruit.x && tmp.y-0.5 <= fruit.y && tmp.y-0.5 >= fruit.y -1) { // head.x <= fruit.x +16 && head.x >= fruit.x -16
         next_fruit();
-        //next_mur();
+        next_mur();
         next_bombs();
         move(1,0);
+        if (meta == 4){
+            meta = 0;
+            switch (lvl){
+            case 1:
+                load_head(SDL_LoadBMP("head.bmp"));
+                break;
+            case 2:
+                load_head(SDL_LoadBMP("head2.bmp"));
+                break;
+            case 3:
+                load_head(SDL_LoadBMP("head3.bmp"));
+                break;
+            case 4:
+                load_head(SDL_LoadBMP("head4.bmp"));
+                break;
+            case 5:
+                load_head(SDL_LoadBMP("head5.bmp"));
+                break;
+            }
+        }
         switch (snake.len) {
             case 10:
 
@@ -87,6 +101,7 @@ int update(void) {
                 load_body(SDL_LoadBMP("snake2.bmp"));
                 load_head(SDL_LoadBMP("head2.bmp"));
                 printf("Level 2\n");
+                lvl = 2;
                 break;
             case 20:
                 *delay -= 2;
@@ -99,6 +114,7 @@ int update(void) {
                 next_metafruit();
 
                 printf("Level 3\n");
+                lvl = 3;
                 break;
             case 30:
                 *delay /= 2;
@@ -112,6 +128,7 @@ int update(void) {
                 next_metafruit();
 
                 printf("Level 4\n");
+                lvl = 4;
                 break;
             case 40:
                 *delay /= 2;
@@ -124,6 +141,7 @@ int update(void) {
                 meta = 3;
                 next_metafruit();
                 printf("Level 5\n");
+                lvl = 5;
                 break;
             case 50:
                 victory();
@@ -132,10 +150,7 @@ int update(void) {
 
         next_bombs();
         move(0,1);
-    }else if (bombe() == 1 && meta == 4){
-        meta = 0;
-        move(0,0);
-    }else if (tmp.x+0.5 <= fruit.x +1 && tmp.x+0.5 >= fruit.x && tmp.y-0.5 <= fruit.y && tmp.y-0.5 >= fruit.y -1){
+    }else if (tmp.x+0.5 <= metafruit.x +1 && tmp.x+0.5 >= metafruit.x && tmp.y-0.5 <= metafruit.y && tmp.y-0.5 >= metafruit.y -1){
         if (meta == 1) load_head(SDL_LoadBMP("headinv3.bmp"));
         if (meta == 2) load_head(SDL_LoadBMP("headinv4.bmp"));
         if (meta == 3) load_head(SDL_LoadBMP("headinv5.bmp"));

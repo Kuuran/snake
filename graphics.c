@@ -189,6 +189,8 @@ void init(void){
 
     compteur_mur = 0;
 
+    lvl = 1;
+
     meta = 0;
 
     for(int i = 0; i<NB_MUR;i++){
