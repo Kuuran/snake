@@ -77,6 +77,7 @@ int update(void) {
 
                 load_level(SDL_LoadBMP("lvl2.bmp"));
 
+
                 printf("Level 2\n");
                 break;
             case 20:
@@ -225,7 +226,7 @@ void next_mur(){
     }while(mat[(int)mur[compteur_mur].x][(int)mur[compteur_mur].y]);
     mat[(int)mur[compteur_mur].x][(int)mur[compteur_mur].y]=1;
 
-    compteur_mur++;
+    compteur_mur = (compteur_mur + 1)%NB_MUR;
 }
 
 void next_metafruit() {

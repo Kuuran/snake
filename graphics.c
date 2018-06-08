@@ -177,8 +177,9 @@ void init(void){
 
     for(int i = 0; i<NB_MUR;i++){
 
-        mur[i].x = 300;
-        mur[i].y = 200;
+        mur[i].x = (int)rand()%700;
+        mur[i].y = (int)rand()%450;
+        mat[(int)mur[i].x][(int)mur[i].y]=1;
 
     }
 
