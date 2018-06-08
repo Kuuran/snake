@@ -26,13 +26,15 @@
 
 #define RIGHT 4
 
-#define MAX_X 24
+#define MAX_X 49
 
-#define MAX_Y 18
+#define MAX_Y 37
 
-#define TILE_SIZE 32
+#define TILE_SIZE 16
 
 #define SPEED_SCALE 1
+
+#define Nb_mur 10
 
 
 typedef struct tag_node {
@@ -69,6 +71,9 @@ char bombed;
 
 char mat[MAX_X+1][MAX_Y+1];
 
+node mur[Nb_mur];
+
+int compteur_mur;
 
 
 node body;
@@ -80,6 +85,7 @@ node tail;
 node fruit;
 
 node bombs;
+
 
 
 

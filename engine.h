@@ -20,6 +20,10 @@ void gameover(void);
 
 void next_fruit(void);
 
+void move(int eaten,int bombed);
+
+void victory();
+
 void next_bombs();
 
 #endif //ENGINE_H
